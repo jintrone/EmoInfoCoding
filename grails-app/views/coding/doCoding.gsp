@@ -15,6 +15,13 @@
 <body>
 
 <div class="container">
+    <g:if test="!${params.workerID}">
+        <div class="padme bg-warning">
+            In this set of HITs, you will be asked to read a forum post and indicate how much informational and / or social
+            support the forum post includes.  The following is a preview of the actual HIT interface. We estimate that on average
+            one HIT should take you less than a minute to complete.
+        </div>
+    </g:if>
     <h2>Social Support in Forums</h2>
 
     <div class="well well-lg">
