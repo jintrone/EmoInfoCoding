@@ -1,0 +1,59 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require bootstrap
+*= require selectize.css
+*= require_self
+*/
+
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+
+
+}
+
+p {
+    line-height:1.4em;
+}
+
+.padme-v {
+    padding-top:15px;
+    padding-bottom:15px;
+}
+
+.padme-h {
+    padding-right: 15px;
+    padding-left:15px;
+
+}
+
+.padme {
+    padding:15px;
+}
+
+.likert li {
+    padding:5px;
+    float: left;
+    list-style-type: none;
+}
+
+.clearfloat {
+    float: none;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+#toSelect{
+    max-height: 600px;
+    overflow-y:scroll;
+}
