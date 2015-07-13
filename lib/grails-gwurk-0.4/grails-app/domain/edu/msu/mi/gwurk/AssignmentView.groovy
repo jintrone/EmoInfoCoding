@@ -58,7 +58,13 @@ class AssignmentView {
         this.rawAnswer = a.answer
         hasData = getFileKey()!=null
         log.info("Has data? ${hasData}")
-       save()
+       save(flush:true)
+        if (hasErrors()) {
+            log.warn("Did not save:")
+            log.warn(getErrors())
+        } else {
+            log.info("No errors detected, should be saved")
+        }
     }
 
     def update(RequesterService service) {

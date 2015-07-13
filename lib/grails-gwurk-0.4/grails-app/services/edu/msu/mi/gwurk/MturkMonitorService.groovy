@@ -28,7 +28,6 @@ class MturkMonitorService {
     }
 
 
-
     public void cleanup() {
         heartBeat = null
         log.info("Would be cleaning up")
@@ -81,14 +80,15 @@ class MturkMonitorService {
         }, 0, pauseTime);
     }
 
-    def launch(Workflow w, boolean real, int iterations, Credentials credentials,Map props) {
-        WorkflowRun run = new WorkflowRun(w,credentials,real,props)
+    def launch(Workflow w, boolean real, int iterations, Credentials credentials, Map props) {
+        WorkflowRun run = new WorkflowRun(w, credentials, real, props)
         run.save()
         run.run(iterations)
+        listeners.add(run)
+    }
 
-            listeners.add(run)
-
-
+    def register(WorkflowRun run) {
+        listeners.add(run)
     }
 
     def beat() {
@@ -97,7 +97,7 @@ class MturkMonitorService {
             if (it instanceof WorkflowRun) {
                 it = WorkflowRun.get(it.id)
             }
-            it.beat(this,System.currentTimeMillis())
+            it.beat(this, System.currentTimeMillis())
         }
         listeners.removeAll {
             it.hasProperty("currentStatus") && it.currentStatus == WorkflowRun.Status.DONE

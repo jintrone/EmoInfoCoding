@@ -2,12 +2,14 @@ import edu.msu.mi.gwurk.GwurkEvent
 import edu.msu.mi.gwurk.SingleHitTask
 import edu.msu.mi.gwurk.Task
 import edu.msu.mi.gwurk.Workflow
+import edu.msu.mi.gwurk.WorkflowRun
 import groovy.json.JsonSlurper
 
 class BootStrap {
 
     def dataService
     def mturkTaskService
+    def mturkMonitorService
 
     def init = { servletContext ->
 
@@ -69,6 +71,10 @@ class BootStrap {
             mturkTaskService.installWorkflow(w) { a, b ->
                 log.info("Workflow complete!")
             }
+        }
+
+        WorkflowRun.findAllByCurrentStatusNotInList([WorkflowRun.Status.ABORTED,WorkflowRun.Status.DONE]).each {
+            mturkMonitorService.register(it)
         }
 
 
